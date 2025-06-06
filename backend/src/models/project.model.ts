@@ -28,7 +28,7 @@ const projectSchema = new Schema<ProjectDocument>(
     description: { type: String, required: false },
     workspace: {
       type: Schema.Types.ObjectId,
-      ref: "Workspace",
+      ref: "Workspace", 
       required: true,
     },
     createdBy: {
