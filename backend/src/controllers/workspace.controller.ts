@@ -11,7 +11,7 @@ import { HTTPSTATUS } from "../config/http.config";
 import {
   changeMemberRoleService,
   createWorkspaceService,
-//   deleteWorkspaceService,
+  deleteWorkspaceService,
   getAllWorkspacesUserIsMemberService,
   getWorkspaceAnalyticsService,
   getWorkspaceByIdService,
@@ -151,23 +151,23 @@ export const updateWorkspaceByIdController = asyncHandler(
   }
 );
 
-// export const deleteWorkspaceByIdController = asyncHandler(
-//   async (req: Request, res: Response) => {
-//     const workspaceId = workspaceIdSchema.parse(req.params.id);
+export const deleteWorkspaceByIdController = asyncHandler(
+  async (req: Request, res: Response) => {
+    const workspaceId = workspaceIdSchema.parse(req.params.id);
 
-//     const userId = req.user?._id;
+    const userId = req.user?._id;
 
-//     const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
-//     roleGuard(role, [Permissions.DELETE_WORKSPACE]);
+    const { role } = await getMemberRoleInWorkspace(userId, workspaceId);
+    roleGuard(role, [Permissions.DELETE_WORKSPACE]);
 
-//     const { currentWorkspace } = await deleteWorkspaceService(
-//       workspaceId,
-//       userId
-//     );
+    const { currentWorkspace } = await deleteWorkspaceService(
+      workspaceId,
+      userId
+    );
 
-//     return res.status(HTTPSTATUS.OK).json({
-//       message: "Workspace deleted successfully",
-//       currentWorkspace,
-//     });
-//   }
-// );
+    return res.status(HTTPSTATUS.OK).json({
+      message: "Workspace deleted successfully",
+      currentWorkspace,
+    });
+  }
+);
